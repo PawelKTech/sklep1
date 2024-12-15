@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Informacje o autorze i programie."
+        android:text="Paweł K."
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />

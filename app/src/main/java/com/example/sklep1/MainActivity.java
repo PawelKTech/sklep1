@@ -244,8 +244,6 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Imie i numer telefonu nie mogą być puste!", Toast.LENGTH_SHORT).show();
                 }
-                Log.v("Godzinnna", formattedDateTime);
-
             }
         });
 
