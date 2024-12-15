@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">sklep1</string>
+    <string name="welcome_message">Cena:</string>
+    <string name="addToShoppingCart">Dodaj do koszyka</string>
+    <string name="Name">Imie i nazwisko lub nazwa firmy</string>
+    <string name="PhonNumber">Numer telefonu</string>
+    <string name="PlaceOrder">Złóż zamówienie</string>
+    <string name="Listazamowien">Lista zamówień</string>
+    <string name="ZapiszUstawienia">Zapisz ustawienia</string>
+    <string name="InfoAutor">Informacje o autorze</string>
+    <string name="Udostepnijanie">Udostępnij zawartość koszyka</string>
+    <string name="WysylanieSms">Wyślij Sms</string>
+    <string name="WysylanieMaila">Wyślij Maila</string>
+    <string name="Powrot">Wróć do zamawiania</string>
+    <string name="UsuwanieRekordow">Usuń zapisane zamówienia</string>
+</resources>

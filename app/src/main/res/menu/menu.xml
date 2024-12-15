@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/listaZamowien"
+        android:title="@string/Listazamowien"
+        app:showAsAction="never"/>
+    <item android:id="@+id/zapiszUstawienia"
+        android:title="@string/ZapiszUstawienia"
+        app:showAsAction="never"/>
+    <item android:id="@+id/oAutorzeProgramu"
+        android:title="@string/InfoAutor"
+        app:showAsAction="never"/>
+    <item android:id="@+id/udostepnijKoszyk"
+        android:title="@string/Udostepnijanie"
+        app:showAsAction="never"/>
+    <item android:id="@+id/sendSms"
+        android:title="@string/WysylanieSms"
+        app:showAsAction="never"/>
+    <item android:id="@+id/sendMail"
+        android:title="@string/WysylanieMaila"
+        app:showAsAction="never"/>
+</menu>
