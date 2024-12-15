@@ -279,6 +279,14 @@ public class MainActivity extends AppCompatActivity {
                 String message = "Name: " + text + "\nCena: " + String.valueOf(suma) + "\nData: " + data;
                 smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(number, null, message, null, null);
+                editor.putBoolean("checkboxForMouse", false);
+                editor.putBoolean("checkboxForKeyboard", false);
+                editor.putBoolean("checkboxForWebcam", false);
+                editor.apply();
+                editor.commit();
+                updateTextView();
+                phonenumber.setText("");
+                name.setText("");
                 Toast.makeText(this, "SMS sent", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Enter phone number and message:", Toast.LENGTH_SHORT).show();
