@@ -49,6 +49,6 @@ public class ZapisanyKoszyk extends AppCompatActivity {
         wyswietlKoszyk = findViewById(R.id.wyswietlKoszyk);
         Intent intent = getIntent();
         String value1 = intent.getStringExtra("koszyk");
-        wyswietlKoszyk.setText("Zapisany koszyk: \n"+ value1);
+        wyswietlKoszyk.setText(getResources().getString(R.string.ZapisanyKoszyk) + "\n" + value1);
     }
 }

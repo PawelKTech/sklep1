@@ -3,12 +3,12 @@ package com.example.sklep1;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.Manifest;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutInfo;
 import android.content.pm.ShortcutManager;
 import android.graphics.drawable.Icon;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import java.text.SimpleDateFormat;
@@ -39,6 +40,7 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int SMS_PERMISSION_CODE = 100;
     DatabaseHelper databaseHelper;
     private Spinner spinner, spinnerMouse, spinnerKeyboard, spinnerWebcam;
 
@@ -147,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         display(DeviceData.webcams, DeviceData.webcamsimageNames, spinnerWebcam);
 
         int selectedHiddenValue1 = DeviceData.computersValues[spinner.getSelectedItemPosition()];
-        textView.setText(getResources().getString(R.string.welcome_message)+ String.valueOf(selectedHiddenValue1) + "PLN");
+        textView.setText(getResources().getString(R.string.Cena)+ String.valueOf(selectedHiddenValue1) + "PLN");
 
 
         //listeners for action on spinner or checkbox
@@ -155,7 +157,13 @@ public class MainActivity extends AppCompatActivity {
         setListeners(checkboxForKeyboard, spinnerKeyboard);
         setListeners(checkboxForWebcam, spinnerWebcam);
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { updateTextView();} @Override public void onNothingSelected(AdapterView<?> parent) { } });
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateTextView();}
+            @Override public void onNothingSelected(AdapterView<?> parent) { } });
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) { requestSmsPermission(); } else { }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,16 +241,16 @@ public class MainActivity extends AppCompatActivity {
                     String nameValue = name.getText().toString();
                     String phoneNumberValue = phonenumber.getText().toString();
                     String sumaValue = String.valueOf(suma);
-                    String message = "Zamówinie złożone przez: " + nameValue + "\n" +
-                            "O godzinie: " + formattedDateTime + "\n" +
-                            "O wartości: " + sumaValue + "\n" +
-                            "Na Number tel.: " + phoneNumberValue;
+                    String message = "Order placed by: " + nameValue + "\n" +
+                            "Time: " + formattedDateTime + "\n" +
+                            "Price: " + sumaValue + "\n" +
+                            "Phon number: " + phoneNumberValue;
                     showAlertDialog(message);
                     updateTextView();
                     phonenumber.setText("");
                     name.setText("");
                 } else {
-                    Toast.makeText(getApplicationContext(), "Imie i numer telefonu nie mogą być puste!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Name and phon Number can t be null!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -260,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void showAlertDialog(String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Zamowienie zostało złożone");
+        builder.setTitle("Order placed by.");
         builder.setMessage(message);
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
@@ -276,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) {
             if (!number.isEmpty() && !text.isEmpty()) {
                 int suma = getKoszykPrice();
-                String message = "Name: " + text + "\nCena: " + String.valueOf(suma) + "\nData: " + data;
+                String message = "Order\nName: " + text + "\nPrice: " + String.valueOf(suma) + "\nDate: " + data;
                 smsManager = SmsManager.getDefault();
                 smsManager.sendTextMessage(number, null, message, null, null);
                 editor.putBoolean("checkboxForMouse", false);
@@ -314,7 +322,7 @@ public class MainActivity extends AppCompatActivity {
         }); }
     private void updateTextView() {
         int total = getKoszykPrice();
-        textView.setText(getResources().getString(R.string.welcome_message) + " " + total + "PLN"); }
+        textView.setText(getResources().getString(R.string.Cena) + " " + total + "PLN"); }
 
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     private class AddDynamicShortcutTask extends AsyncTask<Void, Void, Void> {
@@ -322,19 +330,19 @@ public class MainActivity extends AppCompatActivity {
             ShortcutManager shortcutManager = getSystemService(ShortcutManager.class);
              Intent intent1 = new Intent(MainActivity.this, MainActivity.class);
              intent1.setAction(Intent.ACTION_VIEW);
-             ShortcutInfo shortcut1 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id1") .setShortLabel("Złóż zamowienie") .setLongLabel("Złóż zamowienie") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.zamow)) .setIntent(intent1) .build();
+             ShortcutInfo shortcut1 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id1") .setShortLabel(getResources().getString(R.string.WybeirzProdukt)) .setLongLabel("Złóż zamowienie") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.zamow)) .setIntent(intent1) .build();
 
              Intent intent2 = new Intent(MainActivity.this, ListaZamowien.class);
              intent2.setAction(Intent.ACTION_VIEW);
-             ShortcutInfo shortcut2 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id2") .setShortLabel("Lista zamówień") .setLongLabel("Lista zamówień") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.listazamowien)) .setIntent(intent2) .build();
+             ShortcutInfo shortcut2 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id2") .setShortLabel(getResources().getString(R.string.Listazamowien)) .setLongLabel("Lista zamówień") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.listazamowien)) .setIntent(intent2) .build();
 
              Intent intent3 = new Intent(MainActivity.this, Informacjeoautorze.class);
              intent3.setAction(Intent.ACTION_VIEW);
-             ShortcutInfo shortcut3 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id3") .setShortLabel("Informacje o autorze") .setLongLabel("Informacje o autorze") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.info)) .setIntent(intent3) .build();
+             ShortcutInfo shortcut3 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id3") .setShortLabel(getResources().getString(R.string.InfoAutor)) .setLongLabel("Informacje o autorze") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.info)) .setIntent(intent3) .build();
 
-            Intent intent4 = new Intent(MainActivity.this, MainActivity.class);
-            intent4.setAction("com.example.sklep1.ACTION_SHARE_BASKET");
-            ShortcutInfo shortcut4 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id4") .setShortLabel("Udostępnij koszyk") .setLongLabel("Otwórz MainActivity i udostępnij koszyk") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.share)) .setIntent(intent4) .build();
+            Intent intent4 = new Intent(MainActivity.this, ZapisanyKoszyk.class);
+            intent4.setAction(Intent.ACTION_VIEW);
+            ShortcutInfo shortcut4 = new ShortcutInfo.Builder(MainActivity.this, "dynamic_shortcut_id4") .setShortLabel(getResources().getString(R.string.ZapiszUstawienia)) .setLongLabel("Otwórz MainActivity i udostępnij koszyk") .setIcon(Icon.createWithResource(MainActivity.this, R.drawable.share)) .setIntent(intent4) .build();
 
             shortcutManager.setDynamicShortcuts(Arrays.asList(shortcut1, shortcut2, shortcut3, shortcut4));
             return null; } }
@@ -356,14 +364,14 @@ public class MainActivity extends AppCompatActivity {
         Intent emailIntent = new Intent(Intent.ACTION_SEND);
         emailIntent.setType("message/rfc822");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"adres@przyklad.com"});
-        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Informacje o zamowieniu");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Information about order:");
         String message = getkoszyk();
         emailIntent.putExtra(Intent.EXTRA_TEXT, message);
 
         try {
-            startActivity(Intent.createChooser(emailIntent, "Wybierz aplikację do wysłania e-maila..."));
+            startActivity(Intent.createChooser(emailIntent, "Choose your e-mail aplication..."));
         } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(this, "Nie znaleziono aplikacji do wysyłania e-maili.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Can t find e-mail aplication.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -435,5 +443,10 @@ public class MainActivity extends AppCompatActivity {
     private boolean loadCheckBoxState(String checkBoxName) {
         boolean isChecked = sharedPreferences.getBoolean(checkBoxName, false);
         return isChecked; }
+
+    private void requestSmsPermission() { if (
+            ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.SEND_SMS)) {
+        Toast.makeText(this, "Potrzebujemy twojej zgody na wysyłanie SMS-ów", Toast.LENGTH_LONG).show(); }
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, SMS_PERMISSION_CODE); }
 
 }

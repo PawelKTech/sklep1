@@ -8,9 +8,13 @@
     tools:context=".Informacjeoautorze">
 
     <TextView
+        android:id="@+id/Info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Paweł K."
+        android:text="There should be information about author"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/black"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         />

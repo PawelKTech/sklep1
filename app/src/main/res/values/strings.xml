@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">sklep1</string>
-    <string name="welcome_message">Cena:</string>
+    <string name="Cena">Cena:</string>
     <string name="addToShoppingCart">Dodaj do koszyka</string>
     <string name="Name">Imie i nazwisko lub nazwa firmy</string>
     <string name="PhonNumber">Numer telefonu</string>
@@ -13,4 +13,7 @@
     <string name="WysylanieMaila">Wyślij Maila</string>
     <string name="Powrot">Wróć do zamawiania</string>
     <string name="UsuwanieRekordow">Usuń zapisane zamówienia</string>
+    <string name="WybeirzProdukt">Wybierz produkty:</string>
+    <string name="ZapisanyKoszyk">Zapisany koszyk:</string>
+    <string name="DaneOAutorze">Dane o autorze:</string>
 </resources>

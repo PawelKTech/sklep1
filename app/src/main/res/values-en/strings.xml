@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">sklep1</string>
-    <string name="welcome_message">Price:</string>
+    <string name="Cena">Price:</string>
     <string name="addToShoppingCart">Add to shopping cart</string>
     <string name="Name">Name or company name</string>
     <string name="PhonNumber">Phon number</string>
     <string name="PlaceOrder">Place an order</string>
     <string name="Listazamowien">"Order list "</string>
     <string name="ZapiszUstawienia">Save settings</string>
-    <string name="InfoAutor">Information about creator</string>
+    <string name="InfoAutor">Information about Author</string>
     <string name="Udostepnijanie">Share your shopping cart</string>
     <string name="WysylanieSms">Send Sms</string>
     <string name="WysylanieMaila">Send Mail</string>
     <string name="Powrot">Go back to shopping</string>
     <string name="UsuwanieRekordow">Delete saved orders</string>
+    <string name="WybeirzProdukt">Choose products:</string>
+    <string name="ZapisanyKoszyk">Saved shopping cart:</string>
+    <string name="DaneOAutorze">Data about author:</string>
 </resources>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -13,6 +14,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class Informacjeoautorze extends AppCompatActivity {
+
+    TextView textView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,5 +45,7 @@ public class Informacjeoautorze extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        textView = findViewById(R.id.Info);
+        textView.setText(getResources().getString(R.string.DaneOAutorze) + "\n" + "Paweł K.");
     }
 }
