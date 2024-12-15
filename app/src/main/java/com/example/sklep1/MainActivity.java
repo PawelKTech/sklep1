@@ -284,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
                 editor.putBoolean("checkboxForWebcam", false);
                 editor.apply();
                 editor.commit();
+                checkCheckbox();
                 updateTextView();
                 phonenumber.setText("");
                 name.setText("");
