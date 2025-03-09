@@ -13,4 +13,7 @@
     <string name="WysylanieMaila">Wyślij Maila</string>
     <string name="Powrot">Wróć do zamawiania</string>
     <string name="UsuwanieRekordow">Usuń zapisane zamówienia</string>
+    <string name="addMouseToShoppingCart">Dodaj mysz do koszyka</string>
+    <string name="addKeyboardToShoppingCart">Dodaj klawiature do koszyka</string>
+    <string name="addCameraToShoppingCart">Dodaj kamere do koszyka</string>
 </resources>

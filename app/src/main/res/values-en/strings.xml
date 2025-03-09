@@ -14,4 +14,7 @@
     <string name="WysylanieMaila">Send Mail</string>
     <string name="Powrot">Go back to shopping</string>
     <string name="UsuwanieRekordow">Delete saved orders</string>
+    <string name="addMouseToShoppingCart">Add mouse to shopping cart</string>
+    <string name="addKeyboardToShoppingCart">Add keyboard to shopping cart</string>
+    <string name="addCameraToShoppingCart">Add camera to shopping cart</string>
 </resources>

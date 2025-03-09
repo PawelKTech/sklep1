@@ -32,7 +32,7 @@
     <CheckBox android:id="@+id/checkboxForMouse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addToShoppingCart" />
+        android:text="@string/addMouseToShoppingCart" />
 
     <Spinner android:id="@+id/mouse"
         android:layout_width="match_parent"
@@ -43,7 +43,7 @@
     <CheckBox android:id="@+id/checkboxForKeyboard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addToShoppingCart" />
+        android:text="@string/addKeyboardToShoppingCart" />
 
     <Spinner android:id="@+id/keyboard"
         android:layout_width="match_parent"
@@ -54,7 +54,7 @@
     <CheckBox android:id="@+id/checkboxForWebcam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/addToShoppingCart" />
+        android:text="@string/addCameraToShoppingCart" />
 
     <Spinner android:id="@+id/webcam"
         android:layout_width="match_parent"

@@ -71,10 +71,8 @@ public class MainActivity extends AppCompatActivity {
             break;
 
             case R.id.zapiszUstawienia:
-                String koszyk = getkoszyk();
-                Intent intent3 = new Intent(this, ZapisanyKoszyk.class);
-                intent3.putExtra("koszyk", koszyk);
-                startActivity(intent3);
+                saveData();
+                Toast.makeText(getApplicationContext(), "Save shopping cart !", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.oAutorzeProgramu:
@@ -157,6 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() { @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long id) { updateTextView();} @Override public void onNothingSelected(AdapterView<?> parent) { } });
 
+        loadSavedData();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -244,6 +243,8 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(getApplicationContext(), "Imie i numer telefonu nie mogą być puste!", Toast.LENGTH_SHORT).show();
                 }
+                resetInputs();
+
             }
         });
 
@@ -435,5 +436,71 @@ public class MainActivity extends AppCompatActivity {
     private boolean loadCheckBoxState(String checkBoxName) {
         boolean isChecked = sharedPreferences.getBoolean(checkBoxName, false);
         return isChecked; }
+
+    private void loadSavedData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+
+        int computerPosition = sharedPreferences.getInt("computerPosition", 0);
+        boolean mouseSelected = sharedPreferences.getBoolean("mouseSelected", false);
+        int mousePosition = sharedPreferences.getInt("mousePosition", 0);
+        boolean keyboardSelected = sharedPreferences.getBoolean("keyboardSelected", false);
+        int keyboardPosition = sharedPreferences.getInt("keyboardPosition", 0);
+        boolean webcamSelected = sharedPreferences.getBoolean("webcamSelected", false);
+        int webcamPosition = sharedPreferences.getInt("webcamPosition", 0);
+        String name = sharedPreferences.getString("name", "");
+        String phoneNumber = sharedPreferences.getString("phoneNumber", "");
+
+        spinner.setSelection(computerPosition);
+        checkboxForMouse.setChecked(mouseSelected);
+        spinnerMouse.setSelection(mousePosition);
+        checkboxForKeyboard.setChecked(keyboardSelected);
+        spinnerKeyboard.setSelection(keyboardPosition);
+        checkboxForWebcam.setChecked(webcamSelected);
+        spinnerWebcam.setSelection(webcamPosition);
+        this.name.setText(name);
+        this.phonenumber.setText(phoneNumber);
+    }
+
+    private void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putInt("computerPosition", spinner.getSelectedItemPosition());
+        editor.putBoolean("mouseSelected", checkboxForMouse.isChecked());
+        editor.putInt("mousePosition", spinnerMouse.getSelectedItemPosition());
+        editor.putBoolean("keyboardSelected", checkboxForKeyboard.isChecked());
+        editor.putInt("keyboardPosition", spinnerKeyboard.getSelectedItemPosition());
+        editor.putBoolean("webcamSelected", checkboxForWebcam.isChecked());
+        editor.putInt("webcamPosition", spinnerWebcam.getSelectedItemPosition());
+        editor.putString("name", name.getText().toString());
+        editor.putString("phoneNumber", phonenumber.getText().toString());
+
+        editor.apply();
+    }
+
+    private void resetInputs() {
+        // Reset spinners
+        spinner.setSelection(0);
+        spinnerMouse.setSelection(0);
+        spinnerKeyboard.setSelection(0);
+        spinnerWebcam.setSelection(0);
+
+        // Reset checkboxes
+        checkboxForMouse.setChecked(false);
+        checkboxForKeyboard.setChecked(false);
+        checkboxForWebcam.setChecked(false);
+
+        // Reset EditTexts
+        name.setText("");
+        phonenumber.setText("");
+        textView.setText(getResources().getString(R.string.welcome_message) + " 0 PLN");
+
+        // Clear SharedPreferences
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPreferences", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
+
 
 }
